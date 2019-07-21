@@ -1,18 +1,25 @@
-import request from '@/request.js'
-export function getmenu(){
+import request from '@/utils/request'
+
+// PostData(Url,null||{},null||{})  
+// 公共的post方法
+export function PostData(Url,Params,Data){
     return request({
-        url: '/API/api/User/PowerData/GetInitInfo',
-        method: 'get',
-        params:null
-    })
-}
-let params={
-    UserName:"xrjt-jsb",PWD:"jsb1xrjt",CheckCode:""
-}
-export function checkLogin(){
-    return request({
-        url: '/API/api/User/Login/CheckLogin',
+        url: Url,
         method: 'post',
-        data:params
+        params: Params,
+        data: Data
     })
 }
+
+// getData(Url,null,{})
+// getData(null,GetPowerCarTreeByStep,{})
+
+// 公共的get方法
+export function GetData(Url,Name,Params){
+    return request({
+        url: Url?Url:match(Name),
+        method: 'get',
+        params: Params?Params:null
+    })
+}
+ 
