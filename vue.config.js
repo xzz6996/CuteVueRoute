@@ -11,11 +11,10 @@ module.exports = {
     configureWebpack:(config)=>{  //原生对webpack配置config       
         Object.assign(config,{
             resolve : {
-                extensions:['.js','.vue','.json','.css','.scss'],
+                extensions:['.js','.vue','.json','.css'],
                 alias:{
                     'vue$':'vue/dist/vue.esm.js',
-                    '@':resolve('src'),
-                    'static':resolve('static')
+                    '@':resolve('src')
                 }
             },  
             // externals:{    cdn引用
@@ -41,19 +40,19 @@ module.exports = {
         }
     },
     devServer: {
-        open:process.platform === 'darwin',//返回当前平台类型('darwin','freebsd','linux','sunos'或者 'win32')
-        host:"localhost",
-        port:"8080",
-        https:false, //dev-server 通过 HTTP 提供服务
-        hotOnly:false,
-        proxy: {
-            '/commonApi':{
-                target:'',
-                changeOrigin:true,
-                pathRewrite:{
-                    '^/commonApi':''
-                }
-              }
-        }
+        // open:process.platform === 'darwin',//返回当前平台类型('darwin','freebsd','linux','sunos'或者 'win32')
+        // host:"localhost",
+        // port:"8080",
+        // https:false, //dev-server 通过 HTTP 提供服务
+        // hotOnly:false,
+        // proxy: {
+        //     '/commonApi':{
+        //         target:'',
+        //         changeOrigin:true,
+        //         pathRewrite:{
+        //             '^/commonApi':''
+        //         }
+        //     }
+        // }
     }
 }

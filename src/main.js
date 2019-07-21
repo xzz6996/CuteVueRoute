@@ -6,11 +6,14 @@ import './utils/request'
 import {GetData} from './api/index'
 import {handleAsyncRouter} from './utils/dysRouter'
 import {getToken,removeToken} from './utils/token'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+Vue.use(ElementUI);
 Vue.config.productionTip = false
 
 const whiteList =['login']; //白名单
 router.beforeEach((to, from, next) => {
-  if(getToken()){   //判断token是否存在
+  if(getToken('token')){   //判断token是否存在
     if(to.path!=='/login'){
       if(store.state.routerState){ //判断路由状态,存在的话就不用发起请求
         next();
@@ -37,17 +40,22 @@ router.beforeEach((to, from, next) => {
 
 function gotoRouter(to,next){
   GetData('https://www.easy-mock.com/mock/5d33d4a2d378d9045f559bb0/example/getAsyncRouter',null,getToken()).then(res=>{
-    console.log('解析后端动态路由',res.data);
-    const asyncRouter =  handleAsyncRouter(res.data);
+    console.log('解析后端动态路由',res.data.data);
+    const asyncRouter =  handleAsyncRouter(res.data.data);
+    console.log(asyncRouter[1].component)
     // 一定不能写在静态路由里面，否则会出现，访问动态路由404的情况.所以在这列添加
     asyncRouter.push({ path: '*',redirect: '/404', hidden: true });
-    return asyncRouter
-  }).then(res=>{
-    router.addRoutes(res);//核心
-    store.commit('changeRouterState', true); //改变路由状态
+    return asyncRouter;
+  }).then(asyncRouter=>{
+    //asyncRouter.forEach(item=>{ router.options.routes[1].children.push(item)});
+    asyncRouter.forEach(item=>{ router.options.routes.push(item)});
+    router.addRoutes(asyncRouter);//核心 
+    console.log(router)
     store.dispatch('setRouterList',asyncRouter) // 存储到vuex
-    next({ ...to, replace: true }) // hack方法 确保addRoutes已完成
-  }).catch(err=>{
+    store.commit('changeRouterState', true); //改变路由状态
+    next({ ...to, replace: true }) // hack方法 确保addRoutes已完成 
+  })
+  .catch(err=>{
     removeToken();
   })
 }

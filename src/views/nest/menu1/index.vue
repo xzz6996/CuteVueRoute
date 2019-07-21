@@ -1,21 +1,20 @@
 <template>
   <div class="Container">
-      this is form
+      this is menu1 index.vue
   </div>
 </template>
 
 <script>
 export default {
+    name:"Menu1",
     data(){
         return {
         }
     },
     created(){},
     mounted(){},
-    components:{},
     methods:{},
 }
 </script>
-<style  scoped>
-
+<style lang="scss" scoped>
 </style>

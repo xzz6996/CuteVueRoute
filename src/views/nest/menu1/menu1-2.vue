@@ -1,6 +1,6 @@
 <template>
   <div class="Container">
-      this is table
+      this is menu1-2.vue
   </div>
 </template>
 
@@ -12,9 +12,9 @@ export default {
     },
     created(){},
     mounted(){},
-    components:{},
     methods:{},
 }
 </script>
-<style  scoped>
+<style lang="scss" scoped>
+.Container{}
 </style>

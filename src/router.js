@@ -5,14 +5,24 @@ import Home from './views/Home.vue'
 Vue.use(Router)
 export const staticRouters=[
   {
-    path: '/login',
-    name: 'login',
-    component: () => import( './views/Login.vue')
+    path: '/',
+    redirect: '/home'
   },
   {
     path: '/',
-    name: 'home',
-    component: Home
+    component: Home,
+    children:[
+      {
+        path: '/home',
+        component: () => import('@/views/Home'),
+        meta: { title: 'home', icon: 'home', }
+      }
+    ]
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import( './views/Login.vue')
   },
   {
     path: '/404',

@@ -11,8 +11,8 @@ const service = axios.create({
 service.interceptors.request.use(function (config) {
     // 在发送请求之前做些什么
     config=>{
-        if(getToken()){
-            config.headers['token']=getToken(); //请求头带上token
+        if(getToken('token')){
+            config.headers['token']=getToken('token'); //请求头带上token
         }
     }
     return config;

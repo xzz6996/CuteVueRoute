@@ -1,5 +1,4 @@
-import _import from './_import' // 获取组件的方法
-
+ const _import=require('./_import') // 获取组件的方法
 /*
     处理后端数据,处理成我们需要的路由对象
 */
@@ -7,9 +6,9 @@ export function handleAsyncRouter(routerlist){
     const router=[];
     routerlist.forEach(item=>{
         let e_new={
-            path:item.path,
+            path: item.url,
             name: item.name,
-            component: _import(item.name)
+            component: _import(item.tabId)
         }
         if(item.children){
             e_new=Object.assign({},e_new,{children:handleAsyncRouter(item.children)})
