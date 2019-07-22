@@ -1,4 +1,5 @@
- const _import=require('./_import') // 获取组件的方法
+import { _import } from "./_import";// 获取组件的方法
+
 /*
     处理后端数据,处理成我们需要的路由对象
 */

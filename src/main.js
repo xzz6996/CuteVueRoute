@@ -42,7 +42,6 @@ function gotoRouter(to,next){
   GetData('https://www.easy-mock.com/mock/5d33d4a2d378d9045f559bb0/example/getAsyncRouter',null,getToken()).then(res=>{
     console.log('解析后端动态路由',res.data.data);
     const asyncRouter =  handleAsyncRouter(res.data.data);
-    console.log(asyncRouter[1].component)
     // 一定不能写在静态路由里面，否则会出现，访问动态路由404的情况.所以在这列添加
     asyncRouter.push({ path: '*',redirect: '/404', hidden: true });
     return asyncRouter;

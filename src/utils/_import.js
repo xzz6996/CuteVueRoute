@@ -1,1 +1,4 @@
-module.exports = file => import('@/views' + file + '.vue')
+ export function _import(file){
+    return () => import('@/views' + file + '.vue')
+}
+
